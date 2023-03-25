@@ -1,0 +1,21 @@
+command = "bundle exec rspec"
+arguments = "--format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml --force-color"
+rerun_arguments = "--format documentation --force-color"
+persistence_file = "spec/examples.txt"
+
+ [github]
+ owner = "rwojsznis"
+ repo = "rspec-sanity-example"
+ labels = ['flaky-spec 💩', 'automation']
+ template = '''
+ [Failed build]({{ .Env.CIRCLE_BUILD_URL }})
+
+ Node: `{{ .Env.CIRCLE_NODE_INDEX }}`
+ Branch: `{{ .Env.CIRCLE_BRANCH }}`
+
+ | Example |
+ | --- |
+ {{- range .Examples}}
+ | {{ .Id }} |
+ {{- end}}
+ '''

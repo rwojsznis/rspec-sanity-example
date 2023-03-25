@@ -1,0 +1,42 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@2.0.0
+
+jobs:
+  build:
+    resource_class: small
+    parallelism: 2
+    docker:
+      - image: cimg/ruby:3.2.1
+    steps:
+      - checkout
+      - ruby/install-deps
+
+      # drop rspec-sanity anywhere in your project; you can embed it in your docker CI image
+      # or download it from github releases on each build; root privileges are not required
+      - run:
+          name: Download rspec-sanity
+          command: |
+            wget -c https://github.com/rwojsznis/rspec-sanity/releases/download/0.0.2/rspec-sanity_Linux_x86_64.tar.gz -O - | tar -xz
+
+      - run:
+          name: Run rspec via rspec-sanity
+          command: |
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            ./rspec-sanity run $TEST_FILES
+
+      - store_test_results:
+          path: ~/rspec
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+          context:
+            # define RSPEC_SANITY_GITHUB_TOKEN env - can be scoped to issues only (suggested)
+            - rspec-sanity-example

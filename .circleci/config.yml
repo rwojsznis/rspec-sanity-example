@@ -27,7 +27,7 @@ jobs:
             ./rspec-sanity run $TEST_FILES
 
       - store_test_results:
-          path: ~/rspec
+          path: /tmp/test-results
 
 workflows:
   workflow:

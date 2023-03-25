@@ -1,5 +1,5 @@
 command = "bundle exec rspec"
-arguments = "--format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml --force-color"
+arguments = "--format progress --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --force-color"
 rerun_arguments = "--format documentation --force-color"
 persistence_file = "spec/examples.txt"
 

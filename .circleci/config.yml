@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  ruby: circleci/ruby@2.0.0
+  ruby: circleci/ruby@2.1.1
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Download rspec-sanity
           command: |
-            wget -c https://github.com/rwojsznis/rspec-sanity/releases/download/0.1.0/rspec-sanity_Linux_x86_64.tar.gz -O - | tar -xz
+            wget -c https://github.com/rwojsznis/rspec-sanity/releases/download/0.2.0/rspec-sanity_Linux_x86_64.tar.gz -O - | tar -xz
 
       # Alternatively you could install latest version via apt
       # pre-installing on your CI docker image recommended due to need to refresh apt cache

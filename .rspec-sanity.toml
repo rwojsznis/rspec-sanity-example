@@ -7,6 +7,7 @@ persistence_file = "spec/examples.txt"
  owner = "rwojsznis"
  repo = "rspec-sanity-example"
  labels = ['flaky-spec 💩', 'automation']
+ reopen = true
  template = '''
  [Failed build]({{ .Env.CIRCLE_BUILD_URL }})
 
